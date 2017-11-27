@@ -1,6 +1,6 @@
 package id.sch.smktelkom_mlg.privateassignment.xiirpl603.quiz_googlemapsapi;
 
-import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,16 +11,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-    static final CameraPosition KNDL = CameraPosition.builder()
-            .target(new LatLng(-7.554518, 111.296426))
-            .zoom(17)
-            .bearing(90)
+    static final CameraPosition SEATTLE = CameraPosition.builder()
+            .target(new LatLng(47.6204, -122.2491))
+            .zoom(10)
+            .bearing(0)
             .tilt(45)
             .build();
     /*static final CameraPosition TBN = CameraPosition.builder()
@@ -51,25 +50,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleMap m_map;
     boolean mapReady = false;
-    MarkerOptions rmh;
+    /*MarkerOptions rmh;
     MarkerOptions kntr;
     MarkerOptions puskesmas;
     MarkerOptions sekolah;
     MarkerOptions polres;
-    MarkerOptions alun2;
+    MarkerOptions alun2;*/
+    LatLng renton = new LatLng(-8.400375, 114.273540);
+    LatLng kirkland = new LatLng(47.7301986, -122.1768858);
+    LatLng everett = new LatLng(47.978748, -122.202001);
+    LatLng lynwood = new LatLng(47.819533, -122.32288);
+    LatLng montlake = new LatLng(47.7973733, -122.3281771);
+    LatLng kent = new LatLng(47.385938, -122.258212);
+    LatLng showare = new LatLng(47.38702, -122.23986);
 
-
-    @Override
+    /*@Override
     public Resources getResources() {
         return super.getResources();
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rmh = new MarkerOptions()
+        /*rmh = new MarkerOptions()
                 .position(new LatLng(-7.567328, 111.277135))
                 .title("My House")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         alun2 = new MarkerOptions()
                 .position(new LatLng(-7.402921, 111.444668))
                 .title("Alun-alun Ngawi")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));*/
 
         /*Button btnMap = (Button) findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
@@ -133,20 +138,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
     }
 
-    /*@Override
+    @Override
     public void onMapReady(GoogleMap map) {
         Toast toast = Toast.makeText(getApplicationContext(), "Map Ready!", Toast.LENGTH_SHORT);
         toast.show();
         mapReady = true;
-        m_map = map;*/
+        m_map = map;
         /*LatLng newyork = new LatLng(40.712775, -74.005973);
-        CameraPosition target = CameraPosition.builder().target(newyork).zoom(14).build();
-        m_map.moveCamera(CameraUpdateFactory.newCameraPosition(target));*/
+        CameraPosition target = CameraPosition.builder().target(newyork).zoom(14).build();*/
+        m_map.moveCamera(CameraUpdateFactory.newCameraPosition(SEATTLE));
+        //map.addPolyline(new PolylineOptions().geodesic(true).add(renton).add(kirkland).add(everett).add(lynnwood).add(montlake).add(kent).add(showare).add(renton));
+        //map.addPolygon(new PolygonOptions().add(renton, kirkland, everett, lynnwood).fillColor(Color.GREEN));
         /*m_map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-        flyTo(TBN);
-    }*/
+        flyTo(TBN);*/
+        map.addCircle(new CircleOptions()
+                .center(renton)
+                .radius(5000)
+                .strokeColor(Color.GREEN)
+                .fillColor(Color.argb(64, 0, 255, 0)));
+    }
 
-    @Override
+    /*@Override
     public void onMapReady(GoogleMap map) {
         Toast toast = Toast.makeText(getApplicationContext(), "Map Ready!", Toast.LENGTH_SHORT);
         toast.show();
@@ -158,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         m_map.addMarker(sekolah);
         m_map.addMarker(polres);
         m_map.addMarker(alun2);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
